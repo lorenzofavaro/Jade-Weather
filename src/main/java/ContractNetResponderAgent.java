@@ -3,14 +3,11 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
 import jade.domain.FIPANames;
-import jade.domain.FIPAAgentManagement.NotUnderstoodException;
-import jade.domain.FIPAAgentManagement.RefuseException;
-import jade.domain.FIPAAgentManagement.FailureException;
 import org.json.JSONObject;
 
 public class ContractNetResponderAgent extends Agent {
-    private String baseUrl = "http://api.weatherstack.com/current";
-    private String apiKey = "7a1ed3b9b1dda56a944d8e4d436b6b7a";
+    private String baseUrl = "http://api.weatherapi.com/v1/current.json";
+    private String apiKey = "f5e52cc5fd814e1f8fc142333212606";
 
     protected void setup() {
         System.out.println("L'agente " + getLocalName() + " e' in attesa di una CFP...");
@@ -34,25 +31,26 @@ public class ContractNetResponderAgent extends Agent {
 
             String city = cfp.getContent();
 
-            String forecast = getForecast(city);
+            String weather = getWeather(city);
             ACLMessage propose = cfp.createReply();
-            if (forecast != null) {
+            if (weather != null) {
                 propose.setPerformative(ACLMessage.PROPOSE);
-                propose.setContent(forecast);
+                propose.setContent(weather);
             } else {
                 propose.setPerformative(ACLMessage.REFUSE);
+                propose.setContent("Citta' non trovata");
             }
             return propose;
         }
 
-        private String getForecast(String city) {
-            String apiUrl = baseUrl + "?access_key=" + apiKey + "&query=" + city;
+        private String getWeather(String city) {
+            String apiUrl = baseUrl + "?key=" + apiKey + "&q=" + city;
             JSONObject json = JsonReader.readJsonFromUrl(apiUrl);
 
-            return (json != null && json.has("request") ? buildForecastString(json) : null);
+            return (json != null && !json.has("error") ? buildWeatherString(json) : null);
         }
 
-        private String buildForecastString(JSONObject json) {
+        private String buildWeatherString(JSONObject json) {
             JSONObject location = json.getJSONObject("location");
             String place = location.getString("name");
             String region = location.getString("region");
@@ -60,12 +58,12 @@ public class ContractNetResponderAgent extends Agent {
             String localtime = location.getString("localtime");
 
             JSONObject current = json.getJSONObject("current");
-            int temperature = current.getInt("temperature");
-            int perceived = current.getInt("feelslike");
-            int windspeed = current.getInt("wind_speed");
-            int cloudcover = current.getInt("cloudcover");
+            int temperature = current.getInt("temp_c");
+            int perceived = current.getInt("feelslike_c");
+            int windspeed = current.getInt("wind_kph");
+            int cloudcover = current.getInt("cloud");
             int humidity = current.getInt("humidity");
-            String weather = current.getJSONArray("weather_descriptions").getString(0);
+            String weather = current.getJSONObject("condition").getString("text");
 
             return "=".repeat(100) + "\n" + place + ", " + region + " (" + country + ") - " + localtime +
                     "\n- Weather: " + weather +

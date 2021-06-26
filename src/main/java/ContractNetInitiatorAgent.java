@@ -25,6 +25,7 @@ public class ContractNetInitiatorAgent extends Agent {
             addBehaviour(new MyContractNetInitiator(this, cfp));
         } else {
             System.out.println("Responder non specificato.");
+            doDelete();
         }
     }
 
@@ -42,7 +43,7 @@ public class ContractNetInitiatorAgent extends Agent {
 
         @Override
         protected void handleRefuse(ACLMessage refuse) {
-            System.out.println("L'agente " + refuse.getSender().getLocalName() + " ha rifiutato la richiesta");
+            System.out.println("L'agente " + refuse.getSender().getLocalName() + " ha rifiutato la richiesta: " + refuse.getContent());
         }
 
         @Override
