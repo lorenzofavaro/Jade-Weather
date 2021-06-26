@@ -1,7 +1,7 @@
 # Jade-Weather
 This project was created for the exam of Intelligent Agents of the Master's Degree course at the University of Turin.
 
-The project is an example of the `ContractNet` protocol for requesting the weather forecast in a chosen city through [WeatherStack](https://weatherstack.com/) and [WeatherApi](https://www.weatherapi.com/).
+The project is an example of the `ContractNet` protocol requesting the weather forecast in a chosen city through [WeatherStack](https://weatherstack.com/) and [WeatherApi](https://www.weatherapi.com/).
 
 ## Setup
 - Clone repository
