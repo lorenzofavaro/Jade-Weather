@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -34,8 +28,7 @@ public class ContractNetResponderAgent extends Agent {
         }
 
         @Override
-        protected ACLMessage handleCfp(ACLMessage cfp)
-                throws RefuseException, FailureException, NotUnderstoodException {
+        protected ACLMessage handleCfp(ACLMessage cfp) {
             System.out.println("Agente " + getLocalName() + ": Ho ricevuto una cfp da " + cfp.getSender().getLocalName()
                     + " { id: " + cfp.getConversationId() + ", content: " + cfp.getContent() + " }");
 

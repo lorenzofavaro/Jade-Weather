@@ -29,7 +29,7 @@ public class ContractNetInitiatorAgent extends Agent {
     }
 
 
-    private class MyContractNetInitiator extends ContractNetInitiator {
+    private static class MyContractNetInitiator extends ContractNetInitiator {
 
         public MyContractNetInitiator(Agent a, ACLMessage cfp) {
             super(a, cfp);
