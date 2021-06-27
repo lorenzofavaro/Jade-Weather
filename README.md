@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/lorenzofavaro/Jade-Weather.svg?token=tPgSzvEjF2gJuArbXTE5&branch=master)](https://travis-ci.com/lorenzofavaro/Jade-Weather)
+
 # Jade-Weather
 This project has been created for the exam of Intelligent Agents of the Master's Degree course at the University of Turin.
 
