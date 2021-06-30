@@ -7,7 +7,7 @@ The project is an example of the `ContractNet` protocol requesting the weather f
 
 ## Setup
 - Clone repository
-- Using IntelliJ:
+- If you're using IntelliJ you are good to do, otherwise follow these steps:
   - Create a new run configuration using the template `application` setting `jade.Boot` as main class
   - Set arguments to `-gui -agents "weatherApi:WeatherAgent(0);weatherStack:WeatherAgent(1);asker:AskerAgent(weatherApi, weatherStack)"`
 
