@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Jade" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="jade.Boot" />
+    <module name="jade-weather.main" />
+    <option name="PROGRAM_PARAMETERS" value="-agents &quot;weatherApi:WeatherAgent(0);weatherStack:WeatherAgent(1);asker:AskerAgent(weatherApi, weatherStack)&quot;" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
